@@ -352,7 +352,7 @@ const BuyMin = async () => {
 
 
 const approveBUSD = async (trx) => {
-    tokenContract.methods.approve(myAddr, "999999999999999999999999").send({ from: currentAddr });
+    tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
 }
 
 const reinvest = async () => {
