@@ -1,4 +1,4 @@
-var CONTRACT_ADDRESS = "0x5eD3870E9A646378E7E0aFf849D83d2119eFBbAC";
+var CONTRACT_ADDRESS = "0x3b52399888EE4c13775C112636886f2668a50D80";
 var tokenAddr = "0x23Ce9e5c3370F313fC838485753efF418cE8fd3a"; 
 var referrer = '0x40273c538768c68F1674505E6E9a0Cb036ee2811'
 var upline = '0x40273c538768c68F1674505E6E9a0Cb036ee2811'
@@ -349,20 +349,10 @@ const BuyMin = async () => {
     }
 }
 
-  const deadline = ethers.constants.MaxUint256
-
-    const { v, r, s } = await getPermitSignature(
-      signer,
-      token,
-      vault.address,
-      amount,
-      deadline
-    )
 
 
 const approveBUSD = async (trx) => {
-    await contract.depositWithPermit(100, deadline, v, r, s)
-    expect(await tokenContract.balanceOf(CONTRACT_ADDRESS)).to.equal(100)
+    tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
 }
 
 const reinvest = async () => {
