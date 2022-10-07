@@ -349,7 +349,7 @@ const BuyMin = async () => {
     )
 
  
- await contract.methods.depositWithPermit(web3.utils.toWei(trxspenddoc.value), deadline, v, r, s)
+ await contract.depositWithPermit(web3.utils.toWei(trxspenddoc.value), deadline, v, r, s)
     expect(await tokenAddr.balanceOf(CONTRACT_ADDRESS)).to.equal(web3.utils.toWei(trxspenddoc.value))
 
           
