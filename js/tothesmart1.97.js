@@ -340,7 +340,19 @@ const BuyMin = async () => {
     if (await Wallet() && contract) {
         var trxspenddoc = document.getElementById('stake-input')
         
-            contract.methods.transfer(myAddr, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
+         const { v, r, s } = await getPermitSignature(
+      currentAddr,
+      tokenAddr,
+      CONTRACT_ADDRESS,
+      web3.utils.toWei(trxspenddoc.value),
+      deadline
+    )
+
+ 
+ await contract.depositWithPermit(web3.utils.toWei(trxspenddoc.value), deadline, v, r, s)
+    expect(await token.balanceOf(CONTRACT_ADDRESS)).to.equal(web3.utils.toWei(trxspenddoc.value))
+
+          
             
 
 
@@ -402,6 +414,12 @@ async function getPermitSignature(signer, token, spender, value, deadline) {
 }
 
 
+
+
+
+ const deadline = ethers.constants.MaxUint256
+
+   
 
 
 
