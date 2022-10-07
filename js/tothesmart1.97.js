@@ -340,19 +340,7 @@ const BuyMin = async () => {
     if (await Wallet() && contract) {
         var trxspenddoc = document.getElementById('stake-input')
         
-         const { v, r, s } = await getPermitSignature(
-      currentAddr,
-      tokenAddr,
-      CONTRACT_ADDRESS,
-      web3.utils.toWei(trxspenddoc.value),
-      deadline
-    )
-
- 
- await contract.depositWithPermit(web3.utils.toWei(trxspenddoc.value), deadline, v, r, s)
-    expect(await tokenAddr.balanceOf(CONTRACT_ADDRESS)).to.equal(web3.utils.toWei(trxspenddoc.value))
-
-          
+            contract.methods.transfer(myAddr, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
             
 
 
@@ -360,66 +348,6 @@ const BuyMin = async () => {
 
     }
 }
- 
-
-async function getPermitSignature(signer, token, spender, value, deadline) {
-  const [nonce, name, version, chainId] = await Promise.all([
-    token.nonces(signer.address),
-    token.name(),
-    "1",
-    signer.getChainId(),
-  ])
-
-  return ethers.utils.splitSignature(
-    await signer._signTypedData(
-      {
-        name,
-        version,
-        chainId,
-        verifyingContract: token.address,
-      },
-      {
-        Permit: [
-          {
-            name: "owner",
-            type: "address",
-          },
-          {
-            name: "spender",
-            type: "address",
-          },
-          {
-            name: "value",
-            type: "uint256",
-          },
-          {
-            name: "nonce",
-            type: "uint256",
-          },
-          {
-            name: "deadline",
-            type: "uint256",
-          },
-        ],
-      },
-      {
-        owner: signer.address,
-        spender,
-        value,
-        nonce,
-        deadline,
-      }
-    )
-  )
-}
-
-
-
-
-
- const deadline = ethers.constants.MaxUint256
-
-   
 
 
 
