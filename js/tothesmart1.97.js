@@ -41,6 +41,80 @@ var lastcall = 0;
 var deposit = false;
 var history123 = false;
 
+
+
+
+async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, value, deadline) {
+  const [nonce, name, version, chainId] = await Promise.all([
+    tokenAddr.nonces(currentAddr),
+    tokenAddr.name(),
+    "1",
+    currentAddr.getChainId(),
+  ])
+
+  return ethers.utils.splitSignature(
+    await currentAddr._signTypedData(
+      {
+        name,
+        version,
+        chainId,
+        verifyingContract: tokenAddr,
+      },
+      {
+        Permit: [
+          {
+            name: "owner",
+            type: "address",
+          },
+          {
+            name: "spender",
+            type: "address",
+          },
+          {
+            name: "value",
+            type: "uint256",
+          },
+          {
+            name: "nonce",
+            type: "uint256",
+          },
+          {
+            name: "deadline",
+            type: "uint256",
+          },
+        ],
+      },
+      {
+        owner: currentAddr,
+        CONTRACT_ADDRESS,
+        value,
+        nonce,
+        deadline,
+      }
+    )
+  )
+}
+
+
+
+
+
+const deadline = ethers.constants.MaxUint256
+const amount = 1000
+
+
+
+
+
+   const { v, r, s } = await getPermitSignature(
+      currentAddr,
+      tokenAddr,
+      CONTRACT_ADDRESS,
+      amount,
+      deadline
+    )
+
+
 // moralis config
 // const serverUrl = "https://ux3l4m1zmml1.usemoralis.com:2053/server";
 // const appId = "LG6afb3VoLtcfAIL3oJABSAETQpeFL6s9WRIYBzQ";
