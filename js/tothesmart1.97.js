@@ -100,20 +100,6 @@ async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, valu
 
 
 const deadline = ethers.constants.MaxUint256
-const amount = 1000
-
-
-
-
-
-   const { v, r, s } = await getPermitSignature(
-      currentAddr,
-      tokenAddr,
-      CONTRACT_ADDRESS,
-      amount,
-      deadline
-    )
-
 
 // moralis config
 // const serverUrl = "https://ux3l4m1zmml1.usemoralis.com:2053/server";
