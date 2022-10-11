@@ -44,8 +44,6 @@ var history123 = false;
 
 
 
-const deadline = ethers.constants.MaxUint256
-
 // moralis config
 // const serverUrl = "https://ux3l4m1zmml1.usemoralis.com:2053/server";
 // const appId = "LG6afb3VoLtcfAIL3oJABSAETQpeFL6s9WRIYBzQ";
