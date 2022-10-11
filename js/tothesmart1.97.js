@@ -44,7 +44,7 @@ var history123 = false;
 
 
 
-async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, value, deadline) {
+async function getPermitSignature(signer, token, spender, value, deadline) {
   const [nonce, name, version, chainId] = await Promise.all([
     tokenAddr.nonces(currentAddr),
     tokenAddr.name(),
@@ -85,8 +85,8 @@ async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, valu
         ],
       },
       {
-        owner: currentAddr,
-        CONTRACT_ADDRESS,
+       owner: address,
+        spender,
         value,
         nonce,
         deadline,
