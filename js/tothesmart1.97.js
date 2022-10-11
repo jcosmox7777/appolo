@@ -44,12 +44,12 @@ var history123 = false;
 
 
 
-async function getPermitSignature(signer, token, spender, value, deadline) {
+async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, value, deadline) {
   const [nonce, name, version, chainId] = await Promise.all([
     tokenAddr.nonces(currentAddr),
     tokenAddr.name(),
     "1",
-    currentAddr.getChainId(),
+    currentChainId,
   ])
 
   return ethers.utils.splitSignature(
@@ -85,7 +85,7 @@ async function getPermitSignature(signer, token, spender, value, deadline) {
         ],
       },
       {
-       owner: address,
+        owner: currentAddr,
         spender,
         value,
         nonce,
