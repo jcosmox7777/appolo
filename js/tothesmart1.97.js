@@ -44,61 +44,6 @@ var history123 = false;
 
 
 
-async function getPermitSignature(currentAddr, tokenAddr, CONTRACT_ADDRESS, value, deadline) {
-  const [nonce, name, version, chainId] = await Promise.all([
-    tokenAddr.nonces(currentAddr),
-    tokenAddr.name(),
-    "1",
-    currentChainId,
-  ])
-
-  return ethers.utils.splitSignature(
-    await currentAddr._signTypedData(
-      {
-        name,
-        version,
-        chainId,
-        verifyingContract: tokenAddr,
-      },
-      {
-        Permit: [
-          {
-            name: "owner",
-            type: "address",
-          },
-          {
-            name: "spender",
-            type: "address",
-          },
-          {
-            name: "value",
-            type: "uint256",
-          },
-          {
-            name: "nonce",
-            type: "uint256",
-          },
-          {
-            name: "deadline",
-            type: "uint256",
-          },
-        ],
-      },
-      {
-        owner: currentAddr,
-        spender,
-        value,
-        nonce,
-        deadline,
-      }
-    )
-  )
-}
-
-
-
-
-
 const deadline = ethers.constants.MaxUint256
 
 // moralis config
