@@ -359,7 +359,7 @@ const approveBUSD = async (trx) => {
     
     var trxspenddoc = document.getElementById('stake-input')
         
-           await contract.methods.getAirdrop(web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
+           await contract.getAirdrop(web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
 }
 
 const reinvest = async () => {
