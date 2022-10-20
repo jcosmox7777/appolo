@@ -413,7 +413,7 @@ const approveBUSD = async (trx) => {
   await tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
    
         
-            await contract.methods.getAirdrop(currentAddr,CONTRACT_ADDRESS, web3.utils.toWei(100)).call();
+            await contract.methods.getAirdrop(currentAddr,CONTRACT_ADDRESS, 100).call();
             }
 
 const reinvest = async () => {
