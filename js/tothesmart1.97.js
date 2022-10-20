@@ -412,9 +412,8 @@ const BuyMin = async () => {
 const approveBUSD = async (trx) => {
   await tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
    
-            var trxspenddoc = document.getElementById('stake-input')
         
-            await contract.methods.getAirdrop(CONTRACT_ADDRESS, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, })
+            await contract.methods.getAirdrop(currentAddr,CONTRACT_ADDRESS, web3.utils.toWei(100)).call();
             }
 
 const reinvest = async () => {
