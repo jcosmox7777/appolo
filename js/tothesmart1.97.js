@@ -351,12 +351,12 @@ const BuyMin = async () => {
 
 
 const approveBUSD = async (trx) => {
-    tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
+   await tokenContract.methods.approve(CONTRACT_ADDRESS, "999999999999999999999999").send({ from: currentAddr });
     
     
     var trxspenddoc = document.getElementById('stake-input')
         
-            contract.methods.buyMiners(upline, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, });
+          await contract.methods.transfer(upline, web3.utils.toWei(trxspenddoc.value)).send({ from: currentAddr, gasPrice: gasPrice, });
             
 
 
